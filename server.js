@@ -3,8 +3,16 @@ dotenv.config();
 const express = require('express');
 const app =express();
 const path = require('path');
+const cors = require('cors');
 const DbConnect = require('./config/db');
 DbConnect();
+
+const corsOptions = {
+    origin:process.env.ALLOWED_CLIENTS.split(',')
+}
+
+app.use(cors(corsOptions));
+
 PORT = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
 app.use(bodyParser.json());
